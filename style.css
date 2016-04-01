@@ -55,3 +55,33 @@ html, body{
           transform: translateY(-50%);
   background: #fff;
 }
+
+.wall-left,
+.wall-right {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%; /* This value changes to 400 % once the level is drawn */
+  background: linear-gradient(#fff,#777);
+}
+
+.wall-left {
+  left: 0;
+  -webkit-clip-path: polygon(
+    0 0 /* The first point at top_left of the screen */,
+    40% 0 /* The second point at top_right of the form */,
+    35% 15% /* This point like the previous ones creates the << zig-zag >> */,
+    55% 35%,
+    45% 45%,
+    60% 60%,
+    30% 80%,
+    40% 100% /* This point is on the Left of the #Start-spot */,
+    0 100% /* This point is at bottom_left of the screen */
+    );
+}
+
+.wall-right {
+  right: 0;
+  -webkit-clip-path: polygon(60% 0, 100% 0, 100% 100%, 60% 100%, 44% 81%,
+     70% 60%,57% 44%, 65% 35%, 46% 15%);
+}
