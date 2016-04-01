@@ -23,3 +23,24 @@ html, body{
   -webkit-transform: perspective(200px) rotateX(15deg) translateY(-90px);
           transform: perspective(200px) rotateX(15deg) translateY(-90px);
 }
+
+#gameover,
+#win {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+}
+
+#gameover {
+  display: none;
+  background: tomato;
+
+}
+
+#win {
+  opacity: 0;
+  pointer-events: none;
+}
