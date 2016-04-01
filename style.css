@@ -44,3 +44,14 @@ html, body{
   opacity: 0;
   pointer-events: none;
 }
+
+#start-spot {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: translateX(-50%);
+          transform: translateY(-50%);
+  background: #fff;
+}
