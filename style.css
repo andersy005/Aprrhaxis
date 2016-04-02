@@ -1,19 +1,25 @@
-html, body{
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
   text-align: center;
-
-  /* Some rules for the form */
   font-family: sans-serif;
-  background: #333;
+  background: #035658;
   color: #fff;
   text-transform: capitalize;
 }
 
-#game{
+a {
+  color: tomato;
+}
+
+svg {
+  position: absolute;
+}
+
+
+#game {
   position: relative;
   width: 800px;
   height: 600px;
@@ -22,7 +28,9 @@ html, body{
   overflow: hidden;
   -webkit-transform: perspective(200px) rotateX(15deg) translateY(-90px);
           transform: perspective(200px) rotateX(15deg) translateY(-90px);
+  cursor: url('vessel.png'), auto;
 }
+
 
 #gameover,
 #win {
@@ -31,15 +39,12 @@ html, body{
   left: 0;
   height: 100%;
   width: 100%;
-
 }
 
 #gameover {
   display: none;
   background: tomato;
-
 }
-
 #win {
   opacity: 0;
   pointer-events: none;
@@ -52,7 +57,7 @@ html, body{
   width: 20px;
   height: 20px;
   -webkit-transform: translateX(-50%);
-          transform: translateY(-50%);
+          transform: translateX(-50%);
   background: #fff;
 }
 
@@ -61,27 +66,100 @@ html, body{
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100%; /* This value changes to 400 % once the level is drawn */
-  background: linear-gradient(#fff,#777);
+  height: 400%;
+  background: linear-gradient(#1bb8ac,#777);
+  transform: translateZ(1px);
 }
-
 .wall-left {
   left: 0;
-  -webkit-clip-path: polygon(
-    0 0 /* The first point at top_left of the screen */,
-    40% 0 /* The second point at top_right of the form */,
-    35% 15% /* This point like the previous ones creates the << zig-zag >> */,
-    55% 35%,
-    45% 45%,
-    60% 60%,
-    30% 80%,
-    40% 100% /* This point is on the Left of the #Start-spot */,
-    0 100% /* This point is at bottom_left of the screen */
-    );
+  /*-webkit-clip-path: polygon(0 0, 40% 0, 35% 15%, 55% 35%, 45% 45%, 60% 60%, 30% 80%, 40% 100%, 0 100%);*/
+  -webkit-clip-path: url('#left');
+  clip-path: url('#left');
+  -webkit-clip-path: url('wall.svg#left');
+  clip-path: url('wall.svg#left');
 }
-
 .wall-right {
   right: 0;
-  -webkit-clip-path: polygon(60% 0, 100% 0, 100% 100%, 60% 100%, 44% 81%,
-     70% 60%,57% 44%, 65% 35%, 46% 15%);
+  /*-webkit-clip-path: polygon(60% 0, 100% 0, 100% 100%, 60% 100%, 44% 81%, 70% 60%,57% 44%, 65% 35%,  46% 15%);*/
+  -webkit-clip-path: url('#right');
+  clip-path: url('#right');
+  -webkit-clip-path: url('wall.svg#right');
+  clip-path: url('wall.svg#right');
+}
+
+#game:hover .wall-left,
+#game:hover .wall-right {
+  -webkit-animation: wallScroll 10s ease-in forwards;
+          animation: wallScroll 10s ease-in forwards;
+}
+#game:hover #win {
+  -webkit-animation: win 10s linear forwards;
+          animation: win 10s linear forwards;
+}
+
+#game:hover #start-spot {
+  display: none;
+}
+
+/* use '~' to select an element at the same level far from in the DOM */
+.wall-left:hover ~ #gameover,
+.wall-right:hover ~ #gameover,
+#gameover:hover {
+  display: block;
+  z-index: 1;
+}
+
+
+/* Some Styles for the form */
+#gameover h1,
+#win h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+#instructions {
+  color: #bbc3c8;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  text-indent: 30px;
+  margin: 0;
+}
+
+
+#note{
+  text-align: center;
+  width: 100%;
+
+  margin: 0;
+  position: absolute;
+  z-index: 100;
+}
+
+
+/* The keyframes at the end of the css file, by convention */
+
+
+@keyframes wallScroll {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+
+@keyframes win {
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
